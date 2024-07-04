@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const router = express.Router();
 const Post = require('../models/post');
+const Event = require('../models/event');
 router.get("", async (req,res)=>{
   const locals = {
     title: "Node Js Blog",
@@ -17,8 +18,13 @@ router.get("", async (req,res)=>{
     
   });
 
-  router.get("/about",(req,res)=>{
-    res.render("about");
+  router.get("/about", async (req,res)=>{
+    try {
+      const data = await Event.find();
+      res.render("about", {data});
+    } catch(error){
+      console.log(error);
+    }
   });
   
   /**
@@ -73,23 +79,40 @@ router.get("", async (req,res)=>{
 // function insertPostData (){
 //   Post.insertMany([
 //     {
-//       title: "Building a Blog",
-//     body: "This is the body text"
+//       title: "Bhartiya Janta Party",
+//     body: "Lorem"
 //   },
 //   {
-//     title: "Starting with git",
-//   body: "This is the body text"
+//     title: "Aam Aadmi Party",
+//   body: "Lorem"
 // },
 // {
-//   title: "HTML and CSS",
-// body: "This is the body text"
-//  },
-//  {
-//    title: "Backened",
-//  body: "This is the body text"
+//   title: "Samajwadi Party",
+// body: "Lorem"
 //  }
 //      
-//      ])
+//    ])
 //    }
 //insertPostData();
+
+//function insertEventData (){
+//     Event.insertMany([
+//       {
+//         title: "Aam Aadmi Party",
+//       body: "badhiya party hai",
+//       link: "https://www.google.com/search?q=Aam+Aadmi+party&sca_esv=2e47e62a151241ca&bih=679&biw=1366&hl=en&tbm=nws&sxsrf=ADLYWII7XkWRdBQ7BhdeATaAujSKYFIVUw:1716026142398&story=GiMSIUFBUCBNUCBTd2F0aSBNYWxpd2FsIGFzc2F1bHQgY2FzZTIyCij1rqiq4vHb69UBhs7Km7f9konkAbKekr6WiKP7jwHK04vVw_O36tQBELLY0NALGAVyAhAB&fcs=ACgqzeda-5htx4fotKoM2mIX4vka4wmSyw&sa=X&ved=2ahUKEwj445HF95aGAxUlfGwGHRVdBIsQjcEJegQIGxAD"
+//     },
+//     {
+//       title: "Bhartiya Janta Party",
+//     body: "Donation should be done",
+//      link: "https://www.bjp.org/home"
+//     },
+//     {
+//      title: "Samajwadi Party",
+//    body: "Kardo inhe bhi",
+//    link: "https://www.samajwadiparty.in/"
+//  }
+//        ])
+//      }
+//  insertEventData();
  module.exports = router;
