@@ -1,11 +1,57 @@
+
 <a href="/dashboard"> &larr;Back</a>
 <div class="admin-title">
-    <h2>Add New Post</h2>
+    <h2>Add New Report</h2>
 </div>
 <form action="/add-Post" method="POST">
-    <label for="title" ><b>Title</b></label>
-    <input type="text" placeholder="Post Title" name="title">
-    <label for="body" ><b>Content</b></label>
-    <textarea  name="body" cols="50" rows="10"></textarea>
+    <label for="title"><b>Title</b></label>
+    <input type="text" placeholder="Post Title" name="title" required>
+
+    <label for="body"><b>Problem Description</b></label>
+    <textarea name="body" cols="50" rows="10" required></textarea>
+
+    <label for="state"><b>State</b></label>
+    <select name="state" id="state" required>
+        <option value="" disabled selected>Select your state</option>
+        <option value="state1">Andhra Pradesh</option>
+        <option value="state2">Haryana</option>
+        <option value="state3">Manipur</option>
+        <option value="state3">Sikkim</option>
+        <option value="state3">Arunachal Pradesh</option>
+        <option value="state3">Himachal Pradesh</option>
+        <option value="state3">Meghalaya</option>
+        <option value="state3">Tamil Nadu</option>
+        <option value="state3">Assam</option>
+        <option value="state3">Bihar</option>
+        <option value="state3">Chhattisgarh</option>
+        <option value="state3">Goa</option>
+        <option value="state3">Gujarat</option>
+        <option value="state3">Jharkhand</option>
+        <option value="state3">Karnataka</option>
+        <option value="state3">Kerala</option>
+        <option value="state3">Madhya Pradesh</option>
+        <option value="state3">Maharashtra</option>
+        <option value="state3">Mizoram</option>
+        <option value="state3">Nagaland</option>
+        <option value="state3">Odisha</option>
+        <option value="state3">Punjab</option>
+        <option value="state3">Rajasthan</option>
+        <option value="state3">Telangana</option>
+        <option value="state3">Tripura</option>
+        <option value="state3">Uttarakhand</option>
+        <option value="state3">Uttar Pradesh</option>
+        <option value="state3">West Bengal</option>
+        <option value="state3">Jammu & Kashmir</option>
+        <option value="state3">Chandigarh</option>
+        <option value="state3">Delhi</option>
+        <!-- Add more states as needed -->
+    </select>
+
+    <label for="city"><b>City</b></label>
+    <input type="text" placeholder="City" name="city" required>
+
+    <label for="pincode"><b>Pincode</b></label>
+    <input type="text" placeholder="Pincode" name="pincode" required>
+
     <input class="btn" type="submit" value="Add">
 </form>

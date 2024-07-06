@@ -1,0 +1,174 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@700&display=swap');
+
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background: url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/ab9830f4-5062-44e9-a5c1-d9974f59f10c/d6zq3mw-3307b36a-dab9-4ac8-ba09-d01fb10dfd84.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2FiOTgzMGY0LTUwNjItNDRlOS1hNWMxLWQ5OTc0ZjU5ZjEwY1wvZDZ6cTNtdy0zMzA3YjM2YS1kYWI5LTRhYzgtYmEwOS1kMDFmYjEwZGZkODQuZ2lmIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.C_8CnpB-AJu6QB0Zr5JtWhpYZ4GHNfN4wIe1hoXGRGo') center/cover fixed;
+  color: #333;
+}
+
+.app-container {
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.9); /* White background with slight transparency */
+  border-radius: 10px;
+  max-width: 800px;
+  margin: 40px auto;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.heading {
+  text-align: center;
+  font-size: 36px;
+  margin-bottom: 20px;
+  color: teal; /* Set the text color to be visible on the background */
+  font-family: 'Merriweather', serif;
+  font-weight: 800;
+}
+
+.community-byhead {
+  text-align: center;
+  font-family: 'Merriweather', serif;
+  font-weight: 400;
+  font-size: 1.3rem;
+  margin-bottom: 20px;
+  color: #444;
+}
+
+.create-post-box {
+  margin-bottom: 20px;
+  padding: 20px;
+  background-color: rgba(248, 249, 250, 0.8); /* Background color with opacity */
+  border: 1px solid #ced4da;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.create-post-box h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.create-post-box input,
+.create-post-box textarea {
+  width: calc(100% - 20px);
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.create-post-box input[type="file"]::file-selector-button {
+  background-color: teal;
+  color: white;
+  padding: 0.5rem;
+  border-radius: 5px;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.create-post-box button {
+  background-color: teal;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.create-post-box button:hover {
+  background-color: darkcyan;
+}
+
+#postsContainer {
+  margin-top: 20px;
+}
+
+.post {
+  margin-bottom: 20px;
+  padding: 15px;
+  border: 1px solid #ced4da;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 255, 255, 0.9); /* Background color with opacity */
+}
+
+.post h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: teal;
+}
+
+.post p {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.post img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.post-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.8rem;
+}
+
+.fa-heart {
+  color: red;
+}
+
+.love-post {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.post-comments {
+  border-radius: 20px;
+  display: none;
+  padding: 10px;
+}
+
+.post-comment-box {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+/* Media Queries for responsiveness */
+@media (max-width: 768px) {
+  .create-post-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 90%;
+  }
+}
+.like-button {
+  background-color: transparent; /* Transparent background */
+  border: none; /* No border */
+  color: #333; /* Text color */
+  font-size: 16px; /* Font size */
+  cursor: pointer; /* Pointer cursor */
+  display: flex; /* Flex display to align items */
+  align-items: center; /* Align items vertically */
+}
+
+.like-button i {
+  margin-right: 5px; /* Margin to separate icon from text */
+  color: red; /* Color of the heart icon */
+}
+
+/* Optional: Hover effect */
+.like-button:hover {
+  text-decoration: underline; /* Underline on hover */
+}
+

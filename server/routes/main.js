@@ -4,6 +4,23 @@ const app = express();
 const router = express.Router();
 const Post = require('../models/post');
 const Event = require('../models/event');
+const CommunityPost = require('../models/community_post');
+
+const multer = require('multer');
+
+// Configure Multer
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'uploads/');
+    },
+    filename: function (req, file, cb) {
+        cb(null, Date.now() + '-' + file.originalname);
+    }
+});
+
+const upload = multer({ storage: storage });
+
+
 router.get("", async (req,res)=>{
   const locals = {
     title: "Node Js Blog",
@@ -26,56 +43,100 @@ router.get("", async (req,res)=>{
       console.log(error);
     }
   });
+  router.get("/community", async (req,res)=>{
+    try {
+      res.render("community");
+    } catch(error){
+      console.log(error);
+    }
+  });
   
-  /**
-   * Get /
-   * Post: id
-   */
-  router.get("/post/:id", async (req,res)=>{
+  router.get("/post/:id", async (req, res) => {
     try {
       let slug = req.params.id;
-      const data = await Post.findById({_id : slug});
-
+      const data = await Post.findById({ _id: slug });
+  
       const locals = {
         title: data.title,
         description: "Simple Blog Creation"
-      }
-      
-      
-      res.render('post', {locals, data, currentRoute: `/post/${slug}`});
-    } catch(error){
+      };
+  
+      res.render('post', { locals, data, currentRoute: `/post/${slug}` });
+    } catch (error) {
       console.log(error);
     }
-      
-    });
-    /**
-   * post /
-   * Post: search
-   */
-  router.post("/search", async (req,res)=>{
+  });
+  
+  // Route to search for posts
+  router.post("/search", async (req, res) => {
     try {
       const locals = {
         title: "Search",
-        description: "Simple Blog Creation"
-      }
+        description: "Simple Blog Creation",
+        state: "Delhi",
+        city: "New Delhi",
+        pincode: "110059"
+      };
+  
       let searchTerm = req.body.searchTerm;
-      const searchNoSpecialChar = searchTerm.replace(/[^a-zA-Z0-9]/g, "")
-
+      const searchNoSpecialChar = searchTerm.replace(/[^a-zA-Z0-9]/g, "");
+  
       const data = await Post.find({
         $or: [
-          { title: { $regex: new RegExp(searchNoSpecialChar,'i')}},
-          { body: { $regex: new RegExp(searchNoSpecialChar,'i')}}
+          { title: { $regex: new RegExp(searchNoSpecialChar, 'i') } },
+          { body: { $regex: new RegExp(searchNoSpecialChar, 'i') } },
+          { state: { $regex: new RegExp(searchNoSpecialChar, 'i') } },
+          { city: { $regex: new RegExp(searchNoSpecialChar, 'i') } },
+          { pincode: { $regex: new RegExp(searchNoSpecialChar, 'i') } }
         ]
       });
-      res.render( 'search',{
+  
+      res.render('search', {
         locals,
         data
       });
-    } catch(error){
+    } catch (error) {
       console.log(error);
     }
-      
-    });
+  });
+    // COMMUNITY ROUTES
+    router.get('/api/posts', async (req, res) => {
+      try {
+          const posts = await CommunityPost.find();
+          res.json(posts);
+      } catch (err) {
+          res.status(500).json({ message: err.message });
+      }
+  });
+  
+  router.post('/api/posts', upload.single('photo'), async (req, res) => {
+      const cpost = new CommunityPost({
+          title: req.body.title,
+          body: req.body.body,
+          photo: req.file ? `/uploads/${req.file.filename}` : null
+      });
+      try {
+          const newCPost = await cpost.save();
+          res.status(201).json(newCPost);
+      } catch (err) {
+          res.status(400).json({ message: err.message });
+      }
+  });
+  
+  router.patch('/api/posts/:id/like', async (req, res) => {
+      try {
+          const cpost = await CommunityPost.findById(req.params.id);
+          if (!cpost) return res.status(404).json({ message: 'Post not found' });
+  
+          cpost.likes = (cpost.likes || 0) + 1;
+          const updatedPost = await cpost.save();
+          res.json(updatedPost);
+      } catch (err) {
+          res.status(400).json({ message: err.message });
+      }
+  });
+  
+
 // function insertPostData (){
 //   Post.insertMany([
 //     {

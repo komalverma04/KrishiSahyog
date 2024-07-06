@@ -7,9 +7,28 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const connectDB = require('./server/config/db');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const multer = require('multer');
+const path = require('path');
 const app = express();
 const port = 3000 || process.env.PORT;
+
+app.use(bodyParser.json());
+app.use(cors());
+app.use('/uploads', express.static(path.join(__dirname, 'uploads'))); // Serve static files from the 'uploads' directory
+
+
 connectDB(); // connecting DB
+const storage = multer.diskStorage({
+   destination: function (req, file, cb) {
+       cb(null, 'uploads/');
+   },
+   filename: function (req, file, cb) {
+       cb(null, Date.now() + '-' + file.originalname);
+   }
+});
+const upload = multer({ storage: storage });
 
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());

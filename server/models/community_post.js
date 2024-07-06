@@ -1,25 +1,21 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
-const PostSchema = new Schema({
+
+const CommunityPostSchema = new mongoose.Schema({
     title: {
         type: String,
         required: true
     },
     body: {
         type: String,
-        required: false
-    },
-    state: {
-        type: String,
         required: true
     },
-    city: {
+    photo: {
         type: String,
-        required: true
+        default: null
     },
-    pincode: {
-        type: String,
-        required: true
+    likes: {
+        type: Number,
+        default: 0
     },
     createdAt: {
         type: Date,
@@ -31,4 +27,4 @@ const PostSchema = new Schema({
     }
 });
 
-module.exports = mongoose.model('post',PostSchema);
+module.exports = mongoose.model('CommunityPost', CommunityPostSchema);
