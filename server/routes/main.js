@@ -23,9 +23,12 @@ const upload = multer({ storage: storage });
 
 router.get("", async (req,res)=>{
   const locals = {
-    title: "Node Js Blog",
-    description: "Simple Blog Creation"
-  }
+    title: "Search",
+    description: "Simple Blog Creation",
+    state: "Delhi",
+    city: "New Delhi",
+    pincode: "110059"
+  };
   try {
     const data = await Post.find();
     res.render("index", {data});
@@ -51,54 +54,62 @@ router.get("", async (req,res)=>{
     }
   });
   
-  router.get("/post/:id", async (req, res) => {
-    try {
-      let slug = req.params.id;
-      const data = await Post.findById({ _id: slug });
-  
-      const locals = {
-        title: data.title,
-        description: "Simple Blog Creation"
-      };
-  
-      res.render('post', { locals, data, currentRoute: `/post/${slug}` });
-    } catch (error) {
-      console.log(error);
+  // Route to get a post by ID
+router.get("/post/:id", async (req, res) => {
+  try {
+    let slug = req.params.id;
+    const data = await Post.findById(slug);
+
+    if (!data) {
+      return res.status(404).send('Post not found');
     }
-  });
-  
-  // Route to search for posts
-  router.post("/search", async (req, res) => {
-    try {
-      const locals = {
-        title: "Search",
-        description: "Simple Blog Creation",
-        state: "Delhi",
-        city: "New Delhi",
-        pincode: "110059"
-      };
-  
-      let searchTerm = req.body.searchTerm;
-      const searchNoSpecialChar = searchTerm.replace(/[^a-zA-Z0-9]/g, "");
-  
-      const data = await Post.find({
-        $or: [
-          { title: { $regex: new RegExp(searchNoSpecialChar, 'i') } },
-          { body: { $regex: new RegExp(searchNoSpecialChar, 'i') } },
-          { state: { $regex: new RegExp(searchNoSpecialChar, 'i') } },
-          { city: { $regex: new RegExp(searchNoSpecialChar, 'i') } },
-          { pincode: { $regex: new RegExp(searchNoSpecialChar, 'i') } }
-        ]
-      });
-  
-      res.render('search', {
-        locals,
-        data
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  });
+
+    const locals = {
+      title: "Search",
+      description: "Simple Blog Creation",
+      state: "Delhi",
+      city: "New Delhi",
+      pincode: "110059"
+    };
+
+    res.render('post', { locals, data, currentRoute: `/post/${slug}` });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+// Route to search for posts
+router.post("/search", async (req, res) => {
+  try {
+    const locals = {
+      title: "Search",
+      description: "Simple Blog Creation",
+      state: "Delhi",
+      city: "New Delhi",
+      pincode: "110059"
+    };
+
+    let searchTerm = req.body.searchTerm;
+    const searchNoSpecialChar = searchTerm.replace(/[^a-zA-Z0-9]/g, "");
+
+    const data = await Post.find({
+      $or: [
+        { title: { $regex: new RegExp(searchNoSpecialChar, 'i') } },
+        { body: { $regex: new RegExp(searchNoSpecialChar, 'i') } },
+        { state: { $regex: new RegExp(searchNoSpecialChar, 'i') } },
+        { city: { $regex: new RegExp(searchNoSpecialChar, 'i') } },
+        { pincode: { $regex: new RegExp(searchNoSpecialChar, 'i') } }
+      ]
+    });
+
+    res.render('search', { locals, data });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
     // COMMUNITY ROUTES
     router.get('/api/posts', async (req, res) => {
       try {
@@ -137,24 +148,16 @@ router.get("", async (req,res)=>{
   });
   
 
-// function insertPostData (){
-//   Post.insertMany([
-//     {
-//       title: "Bhartiya Janta Party",
-//     body: "Lorem"
-//   },
-//   {
-//     title: "Aam Aadmi Party",
-//   body: "Lorem"
-// },
-// {
-//   title: "Samajwadi Party",
-// body: "Lorem"
-//  }
-//      
-//    ])
+//  function insertPostData (){
+//    Post.insertMany([
+//      {
+//        title: "Bhartiya Janta Party",
+//      body: "Lorem",    state: "Delhi",    city: "jfhio",    pincode: "8945"
 //    }
-//insertPostData();
+      
+//     ])
+//     }
+// insertPostData();
 
 //function insertEventData (){
 //     Event.insertMany([

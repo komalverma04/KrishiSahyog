@@ -7,7 +7,7 @@ const PostSchema = new Schema({
     },
     body: {
         type: String,
-        required: false
+        required: true
     },
     state: {
         type: String,
