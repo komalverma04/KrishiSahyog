@@ -16,7 +16,10 @@ const authmiddleware = (req,res,next) => {
     }
     try{
         const decoded = jwt.verify(token, jwtsecret);
-        req.userId = decoded.userId;
+        req.user = decoded;
+        console.log("User ID:", req.user.userId);
+
+        // req.userId = decoded.userId;
         next();
     }catch(error){
         console.log(error);
@@ -65,39 +68,40 @@ router.post('/admin',async (req,res) =>{
         res.send('errorfile');
     });
 
-router.get('/dashboard', authmiddleware ,async (req,res) =>{
-        const locals = {
-            title: 'DashBoard',
-            description : 'Simple Blog DashBoard'
-        };
-        try{
-            const data = await Post.find();
-            res.render('admin/dashboard',{locals, data, layout: adminLayout});
-        }catch(error){
-            console.log(error);
-        // Handle error rendering dashboard
+// router.get('/dashboard', authmiddleware ,async (req,res) =>{
+//         const locals = {
+//             title: 'DashBoard',
+//             description : 'Simple Blog DashBoard'
+//         };
+//         try{
+//             const data = await Post.find();
+//             res.render('admin/dashboard',{locals, data, layout: adminLayout});
+//         }catch(error){
+//             console.log(error);
+//         // Handle error rendering dashboard
         
-        }
+//         }
          
-    });
-// router.get('/dashboard', authmiddleware, async (req, res) => {
-//     const locals = {
-//       title: 'Dashboard',
-//       description: 'Simple Blog Dashboard'
-//     };
+//     });
+router.get('/dashboard', authmiddleware, async (req, res) => {
+    const locals = {
+      title: 'Dashboard',
+      description: 'Simple Blog Dashboard'
+    };
   
-//     try {
-//       const userId = req.user.userId; // Assuming authmiddleware sets req.user
-//       const userReports = await Post.find({ author: userId }); // Fetch logged-in user's reports
-//       const otherReports = await Post.find({ author: { $ne: userId } }); // Fetch other users' reports
-  
-//       res.render('admin/dashboard', { locals, userReports, otherReports, layout: adminLayout });
-//     } catch (error) {
-//       console.log(error);
-//       // Handle error rendering dashboard
-//       res.render('error', { message: 'Error loading dashboard', error });
-//     }
-//   });
+    try {
+      const userId = req.user.userId; // Assuming authmiddleware sets req.user
+      const userReports = await Post.find({ author: userId }); // Fetch logged-in user's reports
+      const otherReports = await Post.find({ author: { $ne: userId } }); // Fetch other users' reports
+      console.log("User ID:", req.user.userId);
+
+      res.render('admin/dashboard', { locals, userReports, otherReports, layout: adminLayout });
+    } catch (error) {
+      console.log(error);
+      // Handle error rendering dashboard
+      res.render('error', { message: 'Error loading dashboard', error });
+    }
+  });
 
 
 
@@ -133,8 +137,10 @@ router.get('/dashboard', authmiddleware ,async (req,res) =>{
                     body: req.body.body,
                     state: req.body.state,
                     city: req.body.city,
-                    pincode: req.body.pincode
+                    pincode: req.body.pincode,
+                    author: req.user.userId
                 });
+                console.log('Creating new post with author:', req.user.userId); // Debug log
                 await Post.create(newpost);  
                 res.redirect('/dashboard');
 

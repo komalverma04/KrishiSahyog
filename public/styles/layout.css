@@ -374,3 +374,109 @@ img {
 .latest-events {
   margin-top: 30px;
 }
+/* .admin-title {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.admin-title h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.admin-title .button {
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.admin-title div {
+  margin-bottom: 20px;
+}
+
+.admin-title h2 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.admin-title ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.admin-title li {
+  margin-bottom: 10px;
+}
+
+.admin-title a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.admin-post-controls {
+  margin-top: 5px;
+}
+
+.admin-post-controls .btn {
+  margin-right: 10px;
+}
+
+.admin-post-controls .btn-delete {
+  background-color: red; /* Optional: Only if you want to add some basic styling */
+  /* color: white; */
+/* } */ 
+.admin-title {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.admin-title h1 {
+  display: inline-block;
+  margin: 0;
+}
+
+.admin-title .button {
+  float: right;
+  margin-top: -40px;
+}
+
+.reports-container {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.reports-box {
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.reports-box h2 {
+  margin-top: 0;
+}
+
+.reports-box ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.reports-box li {
+  margin-bottom: 10px;
+}
+
+.admin-post-controls {
+  margin-top: 5px;
+}
+
+.admin-post-controls .btn {
+  margin-right: 10px;
+}
+
+.admin-post-controls .btn-delete {
+  background-color: red; /* Optional: Only if you want to add some basic styling */
+  color: white;
+}
+
