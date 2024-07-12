@@ -5,8 +5,17 @@ const Post = require('../models/post');
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const nodemailer = require('nodemailer');
+const methodOverride = require('method-override');
+
+// Use method override for forms with DELETE and PUT methods
+router.use(methodOverride('_method'));
 
 const jwtsecret = process.env.jwtSECRET;
+const adminUsername = process.env.adminUsername;
+const adminPassword = process.env.adminPassword;
+const appPassword = process.env.appPassword;
+const appEmail = process.env.appEmail;
 
 const adminLayout = '../views/layouts/admin';
 const authmiddleware = (req,res,next) => {
@@ -59,7 +68,12 @@ router.post('/admin',async (req,res) =>{
         }
         const token = jwt.sign({userId: user._id},jwtsecret);
         res.cookie('token', token, {httpOnly: true});
-        res.redirect('/dashboard');
+        if(username === adminUsername && password === adminPassword){
+            res.redirect('/adminDashboard');
+        }else{
+            res.redirect('/dashboard');
+        }
+        
     }catch(error){
         console.log(error);
     }
@@ -68,21 +82,21 @@ router.post('/admin',async (req,res) =>{
         res.send('errorfile');
     });
 
-// router.get('/dashboard', authmiddleware ,async (req,res) =>{
-//         const locals = {
-//             title: 'DashBoard',
-//             description : 'Simple Blog DashBoard'
-//         };
-//         try{
-//             const data = await Post.find();
-//             res.render('admin/dashboard',{locals, data, layout: adminLayout});
-//         }catch(error){
-//             console.log(error);
-//         // Handle error rendering dashboard
+router.get('/adminDashboard', authmiddleware ,async (req,res) =>{
+        const locals = {
+            title: 'DashBoard',
+            description : 'Simple Blog DashBoard'
+        };
+        try{
+            const data = await Post.find();
+            res.render('admin/adminDashboard',{locals, data, layout: adminLayout});
+        }catch(error){
+            console.log(error);
+        // Handle error rendering dashboard
         
-//         }
+        }
          
-//     });
+    });
 router.get('/dashboard', authmiddleware, async (req, res) => {
     const locals = {
       title: 'Dashboard',
@@ -103,7 +117,64 @@ router.get('/dashboard', authmiddleware, async (req, res) => {
     }
   });
 
+//   sending post route for admindashboard
 
+function formatReport(report) {
+    return `
+Report details, please take action on the below report:
+
+Title: ${report.title}
+Problem description: ${report.body}
+State: ${report.state}
+City: ${report.city}
+
+Why this problem arised, please investigate.
+    `;
+}
+
+async function sendEmail(report) {
+    try {
+        let transporter = nodemailer.createTransport({
+            service: 'gmail', // Use your email service
+            auth: {
+                user: appEmail,
+                pass: appPassword,
+            },
+        });
+
+        let mailOptions = {
+            from: appEmail,
+            to: 'komal148btit21@igdtuw.ac.in',
+            subject: 'New Report Submitted',
+            text: formatReport(report),
+        };
+
+        await transporter.sendMail(mailOptions);
+        console.log('Email sent successfully');
+    } catch (error) {
+        console.error('Error sending email:', error);
+        throw error; // Rethrow the error to be handled in the route
+    }
+}
+
+// Route to handle sending the report via email
+router.post('/submit-post/:id', async (req, res) => {
+    try {
+        const postId = req.params.id;
+        const post = await Post.findById(postId);
+
+        if (!post) {
+            return res.status(404).send('Report not found');
+        }
+
+        await sendEmail(post);
+
+        res.redirect('/adminDashboard');
+    } catch (error) {
+        console.error('Error in /submit-post route:', error);
+        res.status(500).send('Internal Server Error');
+    }
+});
 
     router.get('/add-Post', authmiddleware ,async (req,res) =>{
         const locals = {
