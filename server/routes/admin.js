@@ -293,6 +293,20 @@ router.post('/submit-post/:id', async (req, res) => {
         }
          
     });
+
+    // admin delete route
+    router.delete('/admin-delete-post/:id', authmiddleware ,async (req,res) =>{
+       
+        try{
+           await Post.deleteOne({ _id: req.params.id});
+           res.redirect('/adminDashboard');
+        }catch(error){
+            console.log(error);
+        // Handle error rendering dashboard
+        res.send('/errorfile');
+        }
+         
+    });
  /**
  * get /
  * admin - logout
