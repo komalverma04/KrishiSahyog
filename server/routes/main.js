@@ -50,6 +50,14 @@ router.get("", async (req,res)=>{
     }
   });
   
+
+  router.get("/weather", async (req,res)=>{
+    try {
+      res.render("weather");
+    } catch(error){
+      console.log(error);
+    }
+  });
   // **
   // * Get /
   // * Post: id

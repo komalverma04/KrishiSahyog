@@ -4,17 +4,43 @@ body, html {
   margin: 0;
   padding: 0;
   font-family: Arial, sans-serif;
-  background: url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/ab9830f4-5062-44e9-a5c1-d9974f59f10c/d6zq3mw-3307b36a-dab9-4ac8-ba09-d01fb10dfd84.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2FiOTgzMGY0LTUwNjItNDRlOS1hNWMxLWQ5OTc0ZjU5ZjEwY1wvZDZ6cTNtdy0zMzA3YjM2YS1kYWI5LTRhYzgtYmEwOS1kMDFmYjEwZGZkODQuZ2lmIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.C_8CnpB-AJu6QB0Zr5JtWhpYZ4GHNfN4wIe1hoXGRGo') center/cover fixed;
-  color: #333;
+  height: 100%;
+  /* max-height: 600px; */
+  width: 100%;
+  background-color: hsla(200,40%,30%,.4);
+  background-image:   
+    url('https://78.media.tumblr.com/cae86e76225a25b17332dfc9cf8b1121/tumblr_p7n8kqHMuD1uy4lhuo1_540.png'), 
+    url('https://78.media.tumblr.com/66445d34fe560351d474af69ef3f2fb0/tumblr_p7n908E1Jb1uy4lhuo1_1280.png'),
+    url('https://78.media.tumblr.com/8cd0a12b7d9d5ba2c7d26f42c25de99f/tumblr_p7n8kqHMuD1uy4lhuo2_1280.png'),
+    url('https://78.media.tumblr.com/5ecb41b654f4e8878f59445b948ede50/tumblr_p7n8on19cV1uy4lhuo1_1280.png'),
+    url('https://78.media.tumblr.com/28bd9a2522fbf8981d680317ccbf4282/tumblr_p7n8kqHMuD1uy4lhuo3_1280.png');
+  background-repeat: repeat-x;
+  background-position: 
+    0 20%,
+    0 100%,
+    0 50%,
+    0 100%,
+    0 0;
+  background-size: 
+    00px,
+    800px,
+    500px 200px,
+    1000px,
+    400px 260px;
+  animation: 50s para infinite linear;
 }
-
+body{
+  width: 100%;
+  margin-left: 0px;
+}
 .app-container {
   padding: 20px;
   background: rgba(255, 255, 255, 0.9); /* White background with slight transparency */
   border-radius: 10px;
-  max-width: 800px;
+  max-width: 600px;
   margin: 40px auto;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+  
 }
 
 .heading {
@@ -24,6 +50,7 @@ body, html {
   color: teal; /* Set the text color to be visible on the background */
   font-family: 'Merriweather', serif;
   font-weight: 800;
+  /* background-color: #ced4da; */
 }
 
 .community-byhead {
@@ -172,3 +199,15 @@ body, html {
   text-decoration: underline; /* Underline on hover */
 }
 
+
+
+@keyframes para {
+  100% {
+    background-position: 
+      -5000px 20%,
+      -800px 95%,
+      500px 50%,
+      1000px 100%,
+      400px 0;
+    }
+  }
