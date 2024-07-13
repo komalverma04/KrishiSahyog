@@ -42,6 +42,18 @@ router.get("", async (req,res)=>{
       console.log(error);
     }
   });
+  router.get("/contact", async (req,res)=>{
+    const locals = {
+      title: "Node Js Blog",
+      description: "Simple Blog Creation"
+    }
+    try {
+      res.render("contact", locals);
+    } catch(error){
+      console.log(error);
+    }
+  });
+  
   router.get("/community", async (req,res)=>{
     try {
       res.render("community");
@@ -49,7 +61,14 @@ router.get("", async (req,res)=>{
       console.log(error);
     }
   });
-  
+
+  router.get("/weather", async (req,res)=>{
+    try {
+      res.render("weather");
+    } catch(error){
+      console.log(error);
+    }
+  });
 
   router.get("/weather", async (req,res)=>{
     try {
