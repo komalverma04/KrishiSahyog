@@ -59,18 +59,34 @@
         </div>
 
         <script >
-            const apiKey = process.env.weatherapi;
-// FOR API KEY
-// Go to the link-  https://home.openweathermap.org/api_keys
-// Sign in
-// find your api key
+//             const apiKey = process.env.weatherapi;
+// // FOR API KEY
+// // Go to the link-  https://home.openweathermap.org/api_keys
+// // Sign in
+// // find your api key
+
+// async function fetchWeatherData(city) {
+//     try {
+//         const response = await fetch(
+//             `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`
+//         );
+let apiKey;
+
+// Fetch the weather API key from the backend
+fetch('/api/weather-api-key')
+    .then(response => response.json())
+    .then(data => {
+        apiKey = data.apiKey;
+    })
+    .catch(error => {
+        console.error('Error fetching the weather API key:', error);
+    });
 
 async function fetchWeatherData(city) {
     try {
         const response = await fetch(
             `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`
         );
-
         if (!response.ok) {
             throw new Error("Unable to fetch weather data");
         }
