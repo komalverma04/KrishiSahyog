@@ -70,12 +70,12 @@ router.get("", async (req,res)=>{
     }
   });
 
-  app.get('/api/weather-api-key', (req, res) => {
-    const apiKey = process.env.weatherapi;
-    if (!apiKey) {
-      return res.status(500).json({ message: 'Weather API key not configured.' });
+  router.get("/weather", async (req,res)=>{
+    try {
+      res.render("weather");
+    } catch(error){
+      console.log(error);
     }
-    res.json({ apiKey });
   });
   // **
   // * Get /
