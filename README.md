@@ -1,5 +1,45 @@
 # KrishiSahyog
 
+## Image Gallery
+
+<div style="display: flex; flex-wrap: wrap;">
+  <div style="flex: 1 0 30%; margin: 5px;">
+    <img src="./Images/Image1.png" alt="KrishiSahyog Logo" style="width: 100%;">
+  </div>
+  <div style="flex: 1 0 30%; margin: 5px;">
+    <img src="./Images/Image2.png" alt="KrishiSahyog Logo" style="width: 100%;">
+  </div>
+  <div style="flex: 1 0 30%; margin: 5px;">
+    <img src="./Images/Image3.png" alt="KrishiSahyog Logo" style="width: 100%;">
+  </div>
+  <div style="flex: 1 0 30%; margin: 5px;">
+    <img src="./Images/Image4.png" alt="KrishiSahyog Logo" style="width: 100%;">
+  </div>
+  <div style="flex: 1 0 30%; margin: 5px;">
+    <img src="./Images/Image5.png" alt="KrishiSahyog Logo" style="width: 100%;">
+  </div>
+  <div style="flex: 1 0 30%; margin: 5px;">
+    <img src="./Images/Image6.png" alt="KrishiSahyog Logo" style="width: 100%;">
+  </div>
+  <div style="flex: 1 0 30%; margin: 5px;">
+    <img src="./Images/Image7.png" alt="KrishiSahyog Logo" style="width: 100%;">
+  </div>
+  <div style="flex: 1 0 30%; margin: 5px;">
+    <img src="./Images/Image8.png" alt="KrishiSahyog Logo" style="width: 100%;">
+  </div>
+  <div style="flex: 1 0 30%; margin: 5px;">
+    <img src="./Images/Image9.png" alt="KrishiSahyog Logo" style="width: 100%;">
+  </div>
+  <div style="flex: 1 0 30%; margin: 5px;">
+    <img src="./Images/Image10.png" alt="KrishiSahyog Logo" style="width: 100%;">
+  </div>
+  <div style="flex: 1 0 30%; margin: 5px;">
+    <img src="./Images/Image11.png" alt="KrishiSahyog Logo" style="width: 100%;">
+  </div>
+  
+  
+</div>
+
 ## Inspiration
 The inspiration behind KrishiSahyog stems from the urgent need to combat agricultural fraud, which severely impacts farmers globally, especially those in rural areas with limited resources and access to information. The platform aims to empower farmers by providing a safe space to report incidents of fraud anonymously and to access educational resources that enhance their awareness and ability to prevent such fraudulent activities.
 
